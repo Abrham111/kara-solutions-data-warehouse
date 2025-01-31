@@ -1,0 +1,5 @@
+data
+venv
+.env
+*.session
+*.pyc
