@@ -1,3 +1,0 @@
-telethon
-python-dotenv 
-pandas
