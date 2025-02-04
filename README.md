@@ -94,4 +94,3 @@ expose_api/
 
 git clone https://github.com/Abrham111/kara-solutions-data-warehouse.git
 pip install -r requirements.txt
-#### Output
