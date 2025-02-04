@@ -52,6 +52,8 @@ A scalable data pipeline to collect, process, and analyze Ethiopian medical busi
    - **Staging**: Raw data → Structured tables.
    - **Intermediate**: Join business data with geolocations.
    - **Mart Layer**: Aggregate tables for analytics.
+     
+     ---
 ### 3. Object Detection Using YOLO
 ●	Setting Up the Environment:
 ○	Ensure you have the necessary dependencies installed, including YOLO and its required libraries (e.g., OpenCV, TensorFlow, or PyTorch depending on the YOLO implementation).
@@ -69,6 +71,7 @@ pip install -r requirements.txt
 ●	Processing the Detection Results
 ○	Extract relevant data from the detection results, such as bounding box coordinates, confidence scores, and class labels.
 ●	Storing detection data to a database table.
+     ---
 ### 4. Expose the collected data using Fast API
 ●	Setting Up the Environment:
 ○	Install FastAPI and Uvicorn
@@ -80,7 +83,7 @@ expose_api/
 ├── database.py
 ├── models.py
 ├── schemas.py
-└── crud.py
+├──crud.py
 ●	Database Configuration
 ○	In the database.py configure the database connection using SQLAlchemy.
 ●	Creating Data Models
