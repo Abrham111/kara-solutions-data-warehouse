@@ -51,9 +51,8 @@ cursor = conn.cursor()
 # Create Table (if not exists)
 create_table_query = """
 CREATE TABLE IF NOT EXISTS telegram_messages (
-  id SERIAL PRIMARY KEY,
   sender TEXT,
-  message_id INT UNIQUE,
+  message_id SERIAL PRIMARY KEY,
   content TEXT,
   links TEXT,
   emojis TEXT,
