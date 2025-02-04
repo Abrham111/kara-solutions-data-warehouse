@@ -71,7 +71,8 @@ pip install -r requirements.txt
 ●	Processing the Detection Results
 ○	Extract relevant data from the detection results, such as bounding box coordinates, confidence scores, and class labels.
 ●	Storing detection data to a database table.
-     ---
+
+---
 ### 4. Expose the collected data using Fast API
 ●	Setting Up the Environment:
 ○	Install FastAPI and Uvicorn
@@ -95,5 +96,6 @@ expose_api/
 ●	Creating API Endpoints
 ○	In the main.py define the API endpoints using FastAPI.
 
+---
 git clone https://github.com/Abrham111/kara-solutions-data-warehouse.git
 pip install -r requirements.txt
