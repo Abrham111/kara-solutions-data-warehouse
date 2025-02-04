@@ -19,6 +19,35 @@ DB_PORT = os.getenv("POSTGRES_PORT")
 file_path = "../data/telegram_data.csv"
 df = pd.read_csv(file_path)
 
+# Save raw data to PostgreSQL
+conn = psycopg2.connect(
+  dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST, port=DB_PORT
+)
+cursor = conn.cursor()
+
+# Create raw data table (if not exists)
+create_raw_table_query = """
+CREATE TABLE IF NOT EXISTS raw_telegram_data (
+  sender TEXT,
+  id SERIAL PRIMARY KEY,
+  content TEXT,
+  timestamp TEXT
+);
+"""
+cursor.execute(create_raw_table_query)
+conn.commit()
+
+# Insert raw data
+insert_raw_query = """
+INSERT INTO raw_telegram_data (sender, id, content, timestamp)
+VALUES (%s, %s, %s, %s)
+ON CONFLICT (id) DO NOTHING;
+"""
+for _, row in df.iterrows():
+  cursor.execute(insert_raw_query, (row["Sender"], row["id"], row["Content"], row["Timestamp"]))
+
+conn.commit()
+
 # Clean & Transform Data
 def clean_content(content):
   """Removes special characters, extracts links separately, extracts emojis, and normalizes spaces."""
@@ -42,13 +71,7 @@ cleaned_csv_path = "../data/cleaned_data.csv"
 df_cleaned.to_csv(cleaned_csv_path, index=False)
 print(f"Cleaned data saved to {cleaned_csv_path}")
 
-# PostgreSQL Connection
-conn = psycopg2.connect(
-  dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST, port=DB_PORT
-)
-cursor = conn.cursor()
-
-# Create Table (if not exists)
+# Create cleaned data table (if not exists)
 create_table_query = """
 CREATE TABLE IF NOT EXISTS telegram_messages (
   sender TEXT,
